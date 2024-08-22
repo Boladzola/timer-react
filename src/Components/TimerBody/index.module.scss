@@ -18,3 +18,67 @@
     height: 50px;
     margin-top: 2rem;
   }
+
+  .mainTimerBoxWrapper {
+    width: 500px;
+    height:500px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.445); 
+    padding: 2;
+    border-radius: 15px;
+  }
+
+  .gifLoader {
+    position: fixed;
+    top: -300px;
+    right: calc(50vw - 100px);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-size: contain;
+    
+  }
+  .entering {
+    animation: showItem 1s linear forwards;
+  }
+  
+  .entered {
+    animation: stayItem 3s linear forwards; 
+  }
+  
+  .exiting {
+    animation: hideItem 1s linear forwards;
+  }
+  
+  @keyframes showItem {
+    from {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(400px);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes stayItem {
+    from {
+      transform: translateY(400px);
+    }
+    to {
+      transform: translateY(400px);
+    }
+  }
+  
+  @keyframes hideItem {
+    from {
+      transform: translateY(400px);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 0;
+    }
+  }

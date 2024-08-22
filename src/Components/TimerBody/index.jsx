@@ -1,12 +1,16 @@
-import { Box, Button, Slider, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button, Dialog, Typography } from "@mui/material";
+import { useState } from "react";
 import styles from "./index.module.scss";
+import { useSelector } from "react-redux";
+import TimerInputs from "./TimerInputs";
+import gifLoader from "../../assets/clock.gif";
+import { Transition } from "react-transition-group";
 
 
 const timeViewValue = (value) => {
-  if (value < 10) return "0" + value
-  else return value
-}
+  if (value < 10) return "0" + value;
+  else return value;
+};
 
 const getBeautifulTimeValue = (value) => {
   const minutes = Math.floor(value / 60);
@@ -14,102 +18,128 @@ const getBeautifulTimeValue = (value) => {
   return [timeViewValue(minutes), timeViewValue(seconds)];
 };
 
-const TimerBody = ({ prop1 }) => {
-  const [timerValue, setTimerValue] = useState(0);
+// --------------------------------------------------------
+const TimerBody = () => {
+  const [timerValue, setTimerValue] = useState(3);
   const [currentTimerId, setCurrentTimerId] = useState(null);
-  
-  const [minutesValue, setMinutesValue] = useState(0);
-  const [secondsValue, setSecondsValue] = useState(0);
-  const onHandleChangeMinutesValue = (e) => {
-    const newValue = Math.abs(+e.target.value);
-    if (newValue > 60) setMinutesValue(60);
-    else setMinutesValue(newValue);
-  };
-  const onHandleChangeSecondsValue = (e) => {
-    const newValue = Math.abs(e.target.value);
-    if (newValue > 59) setSecondsValue(59);
-    else setSecondsValue(newValue);
-  };
-  
+  const [isMusicDialogOpen, setIsMusicDialogOpen] = useState(false);
+  //-------------------------------------------------------
+  const audioRef = useSelector((state) => state.settings.audioRef);
+  const signalRef = useSelector((state) => state.settings.signalRef);
   const [minutes, seconds] = getBeautifulTimeValue(timerValue);
 
-  const onSetInputsValues = () =>
-    setTimerValue(minutesValue * 60 + +secondsValue);
-  
-  const onTimerStart = () => {
-    const timerId = setInterval(() => setTimerValue((prev) => prev - 1), 1000);
-    setCurrentTimerId(timerId);
+  const playFinalSignal = () => {
+    signalRef.current.play();
   };
+  const playMusic = () => audioRef.current.play();
+  const pauseMusic = () => audioRef.current.pause();
+
   const onTimerStop = () => {
     clearInterval(currentTimerId);
     setCurrentTimerId(null);
+    pauseMusic();
   };
-  
-  const isInputValuesEqualCurrentTime =
-    timerValue === minutesValue * 60 + secondsValue;
-  useEffect(() => {
-    if (!isInputValuesEqualCurrentTime && !currentTimerId) {
-      setMinutesValue(minutes);
-      setSecondsValue(seconds);
-    }
-  }, [timerValue]);
+  const onClickStart = () => setIsMusicDialogOpen(true);
+  const onTimerStart = (withMusic) => {
+    if (withMusic) playMusic();
+    setIsMusicDialogOpen(false);
+    const timerId = setInterval(() => {
+      setTimerValue((prev) => {
+        if (prev === 0) {
+          playFinalSignal();
+          clearInterval(timerId);
+          setCurrentTimerId(null);
+          pauseMusic();
+          return 0;
+        } else return prev - 1;
+      });
+    }, 1000);
+    setCurrentTimerId(timerId);
+  };
+
   return (
-    <Box maxHeight={300}>
-      <Typography variant="h1">
-        {minutes}:{seconds}
-      </Typography>
-      <Slider
-        value={timerValue}
-        onChange={(e) => setTimerValue(e.target.value)}
-        max={3600}
-        disabled={currentTimerId}
-        color="secondary"
-      />
-      <Box className={styles.timerFieldsBox}>
-        <TextField
-          value={minutesValue}
-          onChange={onHandleChangeMinutesValue}
-          disabled={currentTimerId}
-          label={"минуты"}
-          color="secondary"
-          type="number"
-        />
-        <TextField
-          value={secondsValue}
-          onChange={onHandleChangeSecondsValue}
-          disabled={currentTimerId}
-          label={"секунды"}
-          color="secondary"
-          type="number"
-        />
-        <Button
-          onClick={onSetInputsValues}
-          disabled={currentTimerId || isInputValuesEqualCurrentTime}
-          color="secondary"
-          variant="contained"
-        >
-          OK
-        </Button>
+    <>
+      <Box className={styles.mainTimerBoxWrapper}>
+        <Box>
+          <Box className={styles.mainTimerBox}>
+            <Transition
+              in={!!currentTimerId}
+              timeout={1000}
+              mountOnEnter
+              unmountOnExit
+            >
+              {(state) => (
+                <div
+                  className={`${styles.gifLoader} ${styles[state]}`}
+                  style={{ backgroundImage: `url(${gifLoader})` }}
+                />
+              )}
+            </Transition>
+            <Typography variant="h1">
+              {minutes}:{seconds}
+            </Typography>
+            <TimerInputs
+              disabled={!!currentTimerId}
+              setTimerValue={setTimerValue}
+              timerValue={timerValue}
+            />
+            <Box className={styles.timerButtonsBox}>
+              <Button
+                variant="contained"
+                color="success"
+                disabled={currentTimerId}
+                onClick={onClickStart}
+              >
+                START
+              </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={onTimerStop}
+                disabled={!currentTimerId}
+              >
+                STOP
+              </Button>
+            </Box>
+          </Box>
+            {/* ----------------------------------------------- */}
+          <Dialog
+            open={isMusicDialogOpen}
+            onClose={() => setIsMusicDialogOpen(false)}
+          >
+            <Box p={2}>
+              <Box my={2}>
+                <Typography>Do you want to play music?</Typography>
+              </Box>
+              <Box display={"flex"} justifyContent={"space-evenly"} p={1}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={() => onTimerStart(true)}
+                >
+                  Yes
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="success"
+                  onClick={() => onTimerStart()}
+                >
+                  No
+                </Button>
+              </Box>
+              <Box display={"flex"} justifyContent={"center"} p={1}>
+                <Button
+                  color="success"
+                  onClick={() => setIsMusicDialogOpen(false)}
+                >
+                  Cancel
+                </Button>
+              </Box>
+            </Box>
+          </Dialog>
+        </Box>
       </Box>
-      <Box className={styles.timerButtonsBox}>
-        <Button
-          variant="contained"
-          color="secondary"
-          disabled={currentTimerId}
-          onClick={onTimerStart}
-        >
-          START
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={onTimerStop}
-          disabled={!currentTimerId}
-        >
-          STOP
-        </Button>
-      </Box>
-    </Box>
+    </>
   );
 };
 
