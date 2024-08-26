@@ -20,7 +20,7 @@ const getBeautifulTimeValue = (value) => {
 
 // --------------------------------------------------------
 const TimerBody = () => {
-  const [timerValue, setTimerValue] = useState(3);
+  const [timerValue, setTimerValue] = useState(0);
   const [currentTimerId, setCurrentTimerId] = useState(null);
   const [isMusicDialogOpen, setIsMusicDialogOpen] = useState(false);
   //-------------------------------------------------------

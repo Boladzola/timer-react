@@ -47,7 +47,7 @@ const TimerSettings = () => {
         <Box className={styles.dialogMainBox}>
           <Box p={1}>
             <Typography textAlign={"center"} variant="h5">
-              Настройки
+              Settings
             </Typography>
           </Box>
           {/* ------------------------------------------------------- */}

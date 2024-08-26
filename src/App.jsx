@@ -4,6 +4,7 @@ import TimerSettings from "./Components/TimerSettings";
 import TimerBody from "./Components/TimerBody";
 import { setAudioRef, setSignalRef, } from "./store/settingSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Auth from "./Components/Auth";
 
 function App() {
   const dispatch = useDispatch();
@@ -12,15 +13,17 @@ function App() {
   const currentMusic = useSelector((store) => store.settings.currentMusic);
   const currentSignal = useSelector((store) => store.settings.currentSignal);
   const currentBG = useSelector((store) => store.settings.currentBG);
-  useEffect(() => {
-    dispatch(setAudioRef(audioRef));
-    dispatch(setSignalRef(signalRef));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setAudioRef(audioRef));
+  //   dispatch(setSignalRef(signalRef));
+  // }, []);
+  
   return (
     <Box
       sx={{ backgroundImage: `url("${currentBG.src}")` }}
       className={"main_container"}
     >
+      <Auth />
       <TimerSettings />
       <TimerBody />
       <Box>
