@@ -10,4 +10,15 @@
     max-width: 90vw;
     max-height: 90vh;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }

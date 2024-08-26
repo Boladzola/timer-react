@@ -5,6 +5,7 @@ import audio4 from "../../music/m4.mp3";
 import audio5 from "../../music/m5.mp3";
 import audio6 from "../../music/m6.mp3";
 import audio7 from "../../music/m7.mp3";
+import audio8 from "../../music/m8.mp3";
 import signal1 from "../../music/a1.mp3";
 import signal2 from "../../music/a2.mp3";
 import signal3 from "../../music/a3.mp3";
@@ -18,6 +19,8 @@ import bg3 from "../../assets/background/bg3.jpg";
 import bg4 from "../../assets/background/bg4.jpg";
 import bg5 from "../../assets/background/bg5.webp";
 import bg6 from "../../assets/background/bg6.jpg";
+import bg7 from "../../assets/background/bg7.webp";
+import bg8 from "../../assets/background/bg8.gif";
 
 const musicOptions = [
   {
@@ -54,6 +57,11 @@ const musicOptions = [
     id: "7",
     title: "music7",
     src: audio7,
+  },
+  {
+    id: "8",
+    title: "music8",
+    src: audio8,
   },
 ];
 const signalOptions = [
@@ -123,6 +131,16 @@ const backgroundOptions = [
     id: "6",
     title: "bg6",
     src: bg6,
+  },
+  {
+    id: "7",
+    title: "bg7",
+    src: bg7,
+  },
+  {
+    id: "8",
+    title: "bg8",
+    src: bg8,
   },
 ];
 

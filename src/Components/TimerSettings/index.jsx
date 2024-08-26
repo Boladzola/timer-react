@@ -25,10 +25,19 @@ import {
   signalOptions,
 } from "../../store/settingSlice/utils";
 
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+
 const TimerSettings = () => {
   const dispatch = useDispatch();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const audioRef = useSelector((store) => store.settings.audioRef);
+  const signalRef = useSelector((store) => store.settings.signalRef);
+
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [isSignalPlaying, setIsSignalPlaying] = useState(false);
 
   const currentMusic = useSelector((store) => store.settings.currentMusic.id);
   const currentSignal = useSelector((store) => store.settings.currentSignal.id);
@@ -36,6 +45,24 @@ const TimerSettings = () => {
   const changeCurrentMusic = (id) => dispatch(setCurrentMusic(id));
   const changeCurrentSignal = (id) => dispatch(setCurrentSignal(id));
   const changeCurrentBG = (id) => dispatch(setCurrentBG(id));
+
+  const demoMusicPlay = () => {
+    audioRef.current.play();
+    setIsMusicPlaying(true);
+  };
+  const demoMusicPause = () => {
+    audioRef.current.pause();
+    setIsMusicPlaying(false);
+  };
+  // --------------------------------------------
+  const demoSignalPlay = () => {
+    signalRef.current.play();
+    setIsSignalPlaying(true);
+  };
+  const demoSignalPause = () => {
+    signalRef.current.pause();
+    setIsSignalPlaying(false);
+  };
 
   return (
     <Box className={styles.timerSettings}>
@@ -51,11 +78,23 @@ const TimerSettings = () => {
             </Typography>
           </Box>
           {/* ------------------------------------------------------- */}
-          <Box display={"flex"} justifyContent={"space-evenly"} mb={2}>
-            <FormControlLabel
+          <Box className={styles.grid} >
+            {/* <FormControlLabel
               control={<Switch color="success" />}
               label={"Music"}
-            />
+            /> */}
+            <Box>
+              {isMusicPlaying ? (
+                <IconButton color="success">
+                  <PauseRoundedIcon onClick={demoMusicPause} />
+                </IconButton>
+              ) : (
+                <IconButton color="success">
+                  <PlayArrowRoundedIcon onClick={demoMusicPlay} />
+                </IconButton>
+              )}
+            </Box>
+            
             <Select
               value={currentMusic}
               color={"success"}
@@ -69,11 +108,20 @@ const TimerSettings = () => {
             </Select>
           </Box>
           {/* ------------------------------------------------------------- */}
-          <Box display={"flex"} justifyContent={"space-evenly"} mb={2}>
-            <FormControlLabel
+          <Box className={styles.grid} >
+            {/* <FormControlLabel
               control={<Switch color="success" />}
               label={"Alarm"}
-            />
+            /> */}
+            <Box>
+              {isSignalPlaying ? (<IconButton color="success">
+                <PauseRoundedIcon onClick={demoSignalPause} />
+              </IconButton>) : (<IconButton color="success">
+                <PlayArrowRoundedIcon onClick={demoSignalPlay} />
+              </IconButton>)}
+              
+            </Box>
+            
             <Select
               value={currentSignal}
               color={"success"}
@@ -86,8 +134,8 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-         {/* ----------------------------------------------------------------- */}
-          <Box display={"flex"} justifyContent={"space-evenly"} mb={2}>
+          {/* ----------------------------------------------------------------- */}
+          <Box className={styles.grid} >
             <FormControlLabel
               control={<Switch color="success" />}
               label={"Background"}
@@ -104,7 +152,8 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-          <Box display={"flex"} justifyContent={"space-evenly"}>
+          {/* ----------------------------------------------------------------- */}
+          <Box className={styles.grid} >
             <Button
               onClick={() => setIsDialogOpen(false)}
               variant="contained"
