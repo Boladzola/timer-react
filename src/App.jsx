@@ -23,7 +23,8 @@ function App() {
       sx={{ backgroundImage: `url("${currentBG.src}")` }}
       className={"main_container"}
     >
-      {/* <Auth /> */}
+      <Auth />
+      
       <TimerSettings />
       <TimerBody />
       <Box>
