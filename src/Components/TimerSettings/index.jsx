@@ -110,14 +110,14 @@ const TimerSettings = () => {
               variant="contained"
               color="success"
             >
-              Сохранить
+              Save
             </Button>
             <Button
               onClick={() => setIsDialogOpen(false)}
               variant="outlined"
               color="success"
             >
-              Отмена
+              Cancel
             </Button>
           </Box>
         </Box>
