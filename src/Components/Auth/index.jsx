@@ -23,14 +23,14 @@ const Auth = ({ isAuth }) => {
     <Box className={styles.authBox}>
       {isAuth ? (
         <Box>
-          <Typography>{currentUser.name}</Typography>
+          <Typography className={styles.text}>{currentUser.name}</Typography>
           <IconButton>
             <MeetingRoomRoundedIcon />
           </IconButton>
         </Box>
       ) : (
         <Box>
-          <Typography>anonim</Typography>
+          <Typography className={styles.text}>anonim</Typography>
           <IconButton onClick={onSignIn}>
             <VpnKeyRoundedIcon />
           </IconButton>

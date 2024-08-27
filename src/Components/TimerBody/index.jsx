@@ -30,6 +30,10 @@ const TimerBody = () => {
 
   const playFinalSignal = () => {
     signalRef.current.play();
+    setTimeout(() => {
+      signalRef.current.pause();
+      signalRef.current.currentTime = 0; 
+    }, 3000);    
   };
   const playMusic = () => audioRef.current.play();
   const pauseMusic = () => audioRef.current.pause();

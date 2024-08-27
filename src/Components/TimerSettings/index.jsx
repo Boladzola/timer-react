@@ -2,11 +2,9 @@ import {
   Box,
   Button,
   Dialog,
-  FormControlLabel,
   IconButton,
   MenuItem,
   Select,
-  Switch,
   Typography,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -42,6 +40,11 @@ const TimerSettings = () => {
   const currentMusic = useSelector((store) => store.settings.currentMusic.id);
   const currentSignal = useSelector((store) => store.settings.currentSignal.id);
   const currentBG = useSelector((store) => store.settings.currentBG.id);
+
+  const [localMusic, setLocalMusic] = useState(currentMusic);
+  const [localSignal, setLocalSignal] = useState(currentSignal);
+  const [localBG, setLocalBG] = useState(currentBG);
+
   const changeCurrentMusic = (id) => dispatch(setCurrentMusic(id));
   const changeCurrentSignal = (id) => dispatch(setCurrentSignal(id));
   const changeCurrentBG = (id) => dispatch(setCurrentBG(id));
@@ -64,13 +67,31 @@ const TimerSettings = () => {
     setIsSignalPlaying(false);
   };
 
+  const handleOpenDialog = () => {
+    setLocalMusic(currentMusic);
+    setLocalSignal(currentSignal);
+    setLocalBG(currentBG);
+    setIsDialogOpen(true);
+  };
+
+  const handleSave = () => {
+    changeCurrentMusic(localMusic);
+    changeCurrentSignal(localSignal);
+    changeCurrentBG(localBG);
+    setIsDialogOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsDialogOpen(false); // закрываем диалог, откатываем изменения
+  };
+
   return (
     <Box className={styles.timerSettings}>
-      <IconButton color="success" onClick={() => setIsDialogOpen(true)}>
+      <IconButton color="success" onClick={handleOpenDialog}>
         <SettingsIcon />
       </IconButton>
       {/* //----------------------------------------------------- */}
-      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+      <Dialog open={isDialogOpen} onClose={handleCancel}>
         <Box className={styles.dialogMainBox}>
           <Box p={1}>
             <Typography textAlign={"center"} variant="h5">
@@ -96,9 +117,9 @@ const TimerSettings = () => {
             </Box>
             
             <Select
-              value={currentMusic}
+              value={localMusic}
               color={"success"}
-              onChange={(e) => changeCurrentMusic(e.target.value)}
+              onChange={(e) => setLocalMusic(e.target.value)}
             >
               {musicOptions.map((musicItem) => (
                 <MenuItem key={musicItem.id} value={musicItem.id}>
@@ -114,18 +135,21 @@ const TimerSettings = () => {
               label={"Alarm"}
             /> */}
             <Box>
-              {isSignalPlaying ? (<IconButton color="success">
-                <PauseRoundedIcon onClick={demoSignalPause} />
-              </IconButton>) : (<IconButton color="success">
-                <PlayArrowRoundedIcon onClick={demoSignalPlay} />
-              </IconButton>)}
-              
+              {isSignalPlaying ? (
+                <IconButton color="success">
+                  <PauseRoundedIcon onClick={demoSignalPause} />
+                </IconButton>
+              ) : (
+                <IconButton color="success">
+                  <PlayArrowRoundedIcon onClick={demoSignalPlay} />
+                </IconButton>
+              )}
             </Box>
             
             <Select
-              value={currentSignal}
+              value={localSignal}
               color={"success"}
-              onChange={(e) => changeCurrentSignal(e.target.value)}
+              onChange={(e) => setLocalSignal(e.target.value)}
             >
               {signalOptions.map(({ id, title }) => (
                 <MenuItem key={id} value={id}>
@@ -136,14 +160,12 @@ const TimerSettings = () => {
           </Box>
           {/* ----------------------------------------------------------------- */}
           <Box className={styles.grid} >
-            <FormControlLabel
-              control={<Switch color="success" />}
-              label={"Background"}
-            />
+            <Typography>Background</Typography>
+            
             <Select
-              value={currentBG}
+              value={localBG}
               color={"success"}
-              onChange={(e) => changeCurrentBG(e.target.value)}
+              onChange={(e) => setLocalBG(e.target.value)}
             >
               {backgroundOptions.map(({ id, title }) => (
                 <MenuItem key={id} value={id}>
@@ -155,14 +177,14 @@ const TimerSettings = () => {
           {/* ----------------------------------------------------------------- */}
           <Box className={styles.grid} >
             <Button
-              onClick={() => setIsDialogOpen(false)}
+              onClick={handleSave}
               variant="contained"
               color="success"
             >
               Save
             </Button>
             <Button
-              onClick={() => setIsDialogOpen(false)}
+              onClick={handleCancel}
               variant="outlined"
               color="success"
             >
