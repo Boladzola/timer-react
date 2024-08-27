@@ -49,40 +49,47 @@ const TimerSettings = () => {
   const changeCurrentSignal = (id) => dispatch(setCurrentSignal(id));
   const changeCurrentBG = (id) => dispatch(setCurrentBG(id));
 
-  const demoMusicPlay = () => {
+  const demoMusicPlay = () => {     // demo music play
     audioRef.current.play();
     setIsMusicPlaying(true);
   };
-  const demoMusicPause = () => {
+  const demoMusicPause = () => {    // demo music pause
     audioRef.current.pause();
     setIsMusicPlaying(false);
   };
   // --------------------------------------------
-  const demoSignalPlay = () => {
+  const demoSignalPlay = () => {    // demo signal play
     signalRef.current.play();
     setIsSignalPlaying(true);
   };
-  const demoSignalPause = () => {
+  const demoSignalPause = () => {   // demo signal pause
     signalRef.current.pause();
     setIsSignalPlaying(false);
   };
 
-  const handleOpenDialog = () => {
+  const handleOpenDialog = () => {  // open dialoge window
     setLocalMusic(currentMusic);
     setLocalSignal(currentSignal);
     setLocalBG(currentBG);
+    setIsDialogOpen(true); 
+  };
+
+
+  const showBGPreview = () => {    //button show BG in real-time
+    changeCurrentBG(localBG);
     setIsDialogOpen(true);
   };
 
-  const handleSave = () => {
+
+  const handleSave = () => {      //savings
     changeCurrentMusic(localMusic);
     changeCurrentSignal(localSignal);
     changeCurrentBG(localBG);
-    setIsDialogOpen(false);
+    setIsDialogOpen(false);    
   };
 
   const handleCancel = () => {
-    setIsDialogOpen(false); // закрываем диалог, откатываем изменения
+    setIsDialogOpen(false); // close dialog window
   };
 
   return (
@@ -98,12 +105,9 @@ const TimerSettings = () => {
               Settings
             </Typography>
           </Box>
-          {/* ------------------------------------------------------- */}
-          <Box className={styles.grid} >
-            {/* <FormControlLabel
-              control={<Switch color="success" />}
-              label={"Music"}
-            /> */}
+          {/* -----------------------------Music Settings-------------------------- */}
+          <Box className={styles.grid}>
+            
             <Box>
               {isMusicPlaying ? (
                 <IconButton color="success">
@@ -115,7 +119,7 @@ const TimerSettings = () => {
                 </IconButton>
               )}
             </Box>
-            
+
             <Select
               value={localMusic}
               color={"success"}
@@ -128,12 +132,9 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-          {/* ------------------------------------------------------------- */}
-          <Box className={styles.grid} >
-            {/* <FormControlLabel
-              control={<Switch color="success" />}
-              label={"Alarm"}
-            /> */}
+          {/* ---------------------------------Signal settings---------------------------- */}
+          <Box className={styles.grid}>
+            
             <Box>
               {isSignalPlaying ? (
                 <IconButton color="success">
@@ -145,7 +146,7 @@ const TimerSettings = () => {
                 </IconButton>
               )}
             </Box>
-            
+
             <Select
               value={localSignal}
               color={"success"}
@@ -158,10 +159,10 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-          {/* ----------------------------------------------------------------- */}
-          <Box className={styles.grid} >
-            <Typography>Background</Typography>
-            
+          {/* ------------------------------Setting of background----------------------------------- */}
+          <Box className={styles.grid}>
+            <Button onClick={showBGPreview} variant="contained" color="success">Show Background</Button>
+
             <Select
               value={localBG}
               color={"success"}
@@ -174,20 +175,12 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-          {/* ----------------------------------------------------------------- */}
-          <Box className={styles.grid} >
-            <Button
-              onClick={handleSave}
-              variant="contained"
-              color="success"
-            >
+          {/* ------------------------------Save and Cancel Buttons----------------------------------- */}
+          <Box className={styles.grid}>
+            <Button onClick={handleSave} variant="contained" color="success">
               Save
             </Button>
-            <Button
-              onClick={handleCancel}
-              variant="outlined"
-              color="success"
-            >
+            <Button onClick={handleCancel} variant="outlined" color="success">
               Cancel
             </Button>
           </Box>
