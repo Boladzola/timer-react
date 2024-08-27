@@ -46,6 +46,7 @@ const TimerBody = () => {
   const onClickStart = () => setIsMusicDialogOpen(true);
   const onTimerStart = (withMusic) => {
     if (withMusic) playMusic();
+    audioRef.current.loop = true;
     setIsMusicDialogOpen(false);
     const timerId = setInterval(() => {
       setTimerValue((prev) => {
