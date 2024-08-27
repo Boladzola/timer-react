@@ -21,6 +21,7 @@ import bg5 from "../../assets/background/bg5.webp";
 import bg6 from "../../assets/background/bg6.jpg";
 import bg7 from "../../assets/background/bg7.webp";
 import bg8 from "../../assets/background/bg8.gif";
+import bg9 from "../../assets/background/bg9.png";
 
 const musicOptions = [
   {
@@ -141,6 +142,11 @@ const backgroundOptions = [
     id: "8",
     title: "bg8",
     src: bg8,
+  },
+  {
+    id: "9",
+    title: "bg9",
+    src: bg9,
   },
 ];
 
