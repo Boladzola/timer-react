@@ -8,88 +8,103 @@ import {
   Typography,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import styles from "./index.module.scss";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCurrentBG,
   setCurrentMusic,
   setCurrentSignal,
+  setTheme,
 } from "../../store/settingSlice";
 import {
   backgroundOptions,
   musicOptions,
   signalOptions,
+  themes,
 } from "../../store/settingSlice/utils";
-
-import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+import Button_ from "../Button";
+import ButtonOut from "../ButtonOut";
 
 const TimerSettings = () => {
   const dispatch = useDispatch();
-
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const audioRef = useSelector((store) => store.settings.audioRef);
-  const signalRef = useSelector((store) => store.settings.signalRef);
-
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [isSignalPlaying, setIsSignalPlaying] = useState(false);
+  const [localMusic, setLocalMusic] = useState('');
+  const [localSignal, setLocalSignal] = useState('');
+  const [localBG, setLocalBG] = useState('');
+  const [currentTheme, setCurrentTheme] = useState('');
+
+  const audioRef = useRef(new Audio()); // Use ref to control audio playback directly
+  const signalRef = useRef(new Audio()); // Use ref for signal playback
 
   const currentMusic = useSelector((store) => store.settings.currentMusic.id);
   const currentSignal = useSelector((store) => store.settings.currentSignal.id);
   const currentBG = useSelector((store) => store.settings.currentBG.id);
-
-  const [localMusic, setLocalMusic] = useState(currentMusic);
-  const [localSignal, setLocalSignal] = useState(currentSignal);
-  const [localBG, setLocalBG] = useState(currentBG);
+  const theme = useSelector((store) => store.settings.theme);
 
   const changeCurrentMusic = (id) => dispatch(setCurrentMusic(id));
   const changeCurrentSignal = (id) => dispatch(setCurrentSignal(id));
   const changeCurrentBG = (id) => dispatch(setCurrentBG(id));
+  const changeTheme = (id) => dispatch(setTheme(id));
 
-  const demoMusicPlay = () => {     // demo music play
+  useEffect(() => {
+    // Update audio source when localMusic changes
+    audioRef.current.src = musicOptions.find(music => music.id === localMusic)?.src || '';
+    audioRef.current.load(); // Reload the audio
+  }, [localMusic]);
+
+  useEffect(() => {
+    // Update signal source when localSignal changes
+    signalRef.current.src = signalOptions.find(signal => signal.id === localSignal)?.src || '';
+    signalRef.current.load(); // Reload the signal
+  }, [localSignal]);
+
+  const demoMusicPlay = () => {
     audioRef.current.play();
     setIsMusicPlaying(true);
   };
-  const demoMusicPause = () => {    // demo music pause
+
+  const demoMusicPause = () => {
     audioRef.current.pause();
     setIsMusicPlaying(false);
   };
-  // --------------------------------------------
-  const demoSignalPlay = () => {    // demo signal play
+
+  const demoSignalPlay = () => {
     signalRef.current.play();
     setIsSignalPlaying(true);
   };
-  const demoSignalPause = () => {   // demo signal pause
+
+  const demoSignalPause = () => {
     signalRef.current.pause();
     setIsSignalPlaying(false);
   };
 
-  const handleOpenDialog = () => {  // open dialoge window
+  const handleOpenDialog = () => {
     setLocalMusic(currentMusic);
     setLocalSignal(currentSignal);
     setLocalBG(currentBG);
-    setIsDialogOpen(true); 
-  };
-
-
-  const showBGPreview = () => {    //button show BG in real-time
-    changeCurrentBG(localBG);
+    setCurrentTheme(theme.id); // Assuming theme.id is used
     setIsDialogOpen(true);
   };
 
+  const showBGPreview = () => {
+    changeCurrentBG(localBG);
+  };
 
-  const handleSave = () => {      //savings
+  const handleSave = () => {
     changeCurrentMusic(localMusic);
     changeCurrentSignal(localSignal);
     changeCurrentBG(localBG);
-    setIsDialogOpen(false);    
+    changeTheme(currentTheme);
+    setIsDialogOpen(false);
   };
 
   const handleCancel = () => {
-    setIsDialogOpen(false); // close dialog window
+    setIsDialogOpen(false);
   };
 
   return (
@@ -97,7 +112,6 @@ const TimerSettings = () => {
       <IconButton color="success" onClick={handleOpenDialog}>
         <SettingsIcon />
       </IconButton>
-      {/* //----------------------------------------------------- */}
       <Dialog open={isDialogOpen} onClose={handleCancel}>
         <Box className={styles.dialogMainBox}>
           <Box p={1}>
@@ -105,21 +119,18 @@ const TimerSettings = () => {
               Settings
             </Typography>
           </Box>
-          {/* -----------------------------Music Settings-------------------------- */}
           <Box className={styles.grid}>
-            
             <Box>
               {isMusicPlaying ? (
-                <IconButton color="success">
-                  <PauseRoundedIcon onClick={demoMusicPause} />
+                <IconButton color="success" onClick={demoMusicPause}>
+                  <PauseRoundedIcon />
                 </IconButton>
               ) : (
-                <IconButton color="success">
-                  <PlayArrowRoundedIcon onClick={demoMusicPlay} />
+                <IconButton color="success" onClick={demoMusicPlay}>
+                  <PlayArrowRoundedIcon />
                 </IconButton>
               )}
             </Box>
-
             <Select
               value={localMusic}
               color={"success"}
@@ -132,21 +143,18 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-          {/* ---------------------------------Signal settings---------------------------- */}
           <Box className={styles.grid}>
-            
             <Box>
               {isSignalPlaying ? (
-                <IconButton color="success">
-                  <PauseRoundedIcon onClick={demoSignalPause} />
+                <IconButton color="success" onClick={demoSignalPause}>
+                  <PauseRoundedIcon />
                 </IconButton>
               ) : (
-                <IconButton color="success">
-                  <PlayArrowRoundedIcon onClick={demoSignalPlay} />
+                <IconButton color="success" onClick={demoSignalPlay}>
+                  <PlayArrowRoundedIcon />
                 </IconButton>
               )}
             </Box>
-
             <Select
               value={localSignal}
               color={"success"}
@@ -159,10 +167,10 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-          {/* ------------------------------Setting of background----------------------------------- */}
           <Box className={styles.grid}>
-            <Button onClick={showBGPreview} variant="contained" color="success">Show Background</Button>
-
+            <Button_ onClick={showBGPreview} variant="contained" >
+              Show Background
+            </Button_>
             <Select
               value={localBG}
               color={"success"}
@@ -175,14 +183,27 @@ const TimerSettings = () => {
               ))}
             </Select>
           </Box>
-          {/* ------------------------------Save and Cancel Buttons----------------------------------- */}
           <Box className={styles.grid}>
-            <Button onClick={handleSave} variant="contained" color="success">
+            <Button_>Change theme</Button_>
+            <Select
+              value={currentTheme}
+              color={"success"}
+              onChange={(e) => setCurrentTheme(e.target.value)}
+            >
+              {themes.map(({ id, color }) => (
+                <MenuItem key={id} value={id}>
+                  {color}
+                </MenuItem>
+              ))}
+            </Select>
+          </Box>
+          <Box className={styles.grid}>
+            <Button_ onClick={handleSave} variant="contained" color="success">
               Save
-            </Button>
-            <Button onClick={handleCancel} variant="outlined" color="success">
+            </Button_>
+            <ButtonOut onClick={handleCancel} variant="outlined" color="success">
               Cancel
-            </Button>
+            </ButtonOut>
           </Box>
         </Box>
       </Dialog>

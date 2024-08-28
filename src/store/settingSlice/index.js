@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { backgroundOptions, musicOptions, signalOptions } from "./utils";
+import { backgroundOptions, musicOptions, signalOptions, themes } from "./utils";
+
 
 const initialState = {
   audioRef: null,
@@ -7,8 +8,8 @@ const initialState = {
   currentMusic: musicOptions[0],
   currentSignal: signalOptions[0],
   currentBG: backgroundOptions[0],
-  theme: "light",
   musicIsPlaying: false,
+  theme: themes[0],
 };
 
 const settingsSlice = createSlice({
@@ -33,7 +34,10 @@ const settingsSlice = createSlice({
       const newBG = backgroundOptions.find((item) => item.id === id);
       if (newBG) state.currentBG = newBG;
     },
-    
+    setTheme(state, { payload: id }) {
+      const newTheme = themes.find((item) => item.id === id);
+      if (newTheme) state.theme = newTheme;
+    },
   },
 });
 
@@ -45,5 +49,5 @@ export const {
   setCurrentMusic,
   setCurrentSignal,
   setCurrentBG,
- 
+  setTheme,
 } = settingsSlice.actions;

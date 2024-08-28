@@ -1,0 +1,104 @@
+.salmon {
+  background-color: #f44336 !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #ef9a9a !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #b71c1c !important;
+    color: #fff !important;
+  }
+}
+
+.turquiose {
+  background-color: #00bcd4 !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #80deea !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #00acc1 !important;
+    color: #fff !important;
+  }
+}
+
+.green {
+  background-color: #00c853 !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #b9f6ca !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #03923e !important;
+    color: #fff !important;
+  }
+}
+
+.pink {
+  background-color: #ec407a !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #f8bbd0 !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #ad1457 !important;
+    color: #fff !important;
+  }
+}
+
+
+.bluegreen {
+  background-color: #00695c !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #80cbc4 !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #004d40 !important;
+    color: #fff !important;
+  }
+}
+
+.dark {
+  background-color: #000 !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #bdbdbd !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #263238 !important;
+    color: #fff !important;
+  }
+}
+
+.grey {
+  background-color: #78909c !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #b0bec5 !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #607d8b !important;
+    color: #fff !important;
+  }
+}
+
+.default {
+  background-color: #5c6bc0 !important;
+  color: #fff !important;
+  &:disabled {
+    background-color: #c5cae9 !important;
+    color: #fff !important;
+  }
+  &:hover {
+    background-color: #3f51b5 !important;
+    color: #fff !important;
+  }
+}

@@ -150,4 +150,55 @@ const backgroundOptions = [
   },
 ];
 
-export { musicOptions, signalOptions, backgroundOptions };
+const themes = [
+  {
+    id: 1,
+    color: "salmon",
+  },
+  {
+    id: 2,
+    color: "turquiose",
+  },
+  {
+    id: 3,
+    color: "green",
+  },
+  {
+    id: 4,
+    color: "pink",
+  },
+  {
+    id: 5,
+    color: "bluegreen",
+  },
+  {
+    id: 6,
+    color: "dark",
+  },
+  {
+    id: 7,
+    color: "grey",
+  },
+  // {
+  //   id: 8,
+  //   color:"turquiose"
+  // },
+  // {
+  //   id: 9,
+  //   color:"turquiose"
+  // },
+  // {
+  //   color: "green",
+  // },
+  // {
+  //   color: "pink",
+  // },
+  // {
+  //   color: "blue-green",
+  // },
+  // {
+  //   color: "dark",
+  // },
+];
+
+export { musicOptions, signalOptions, backgroundOptions, themes };

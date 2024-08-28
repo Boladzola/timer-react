@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import TimerInputs from "./TimerInputs";
 import gifLoader from "../../assets/clock.gif";
 import { Transition } from "react-transition-group";
+import Button_ from "../Button";
+import ButtonOut from "../ButtonOut";
 
 
 const timeViewValue = (value) => {
@@ -46,7 +48,7 @@ const TimerBody = () => {
   const onClickStart = () => setIsMusicDialogOpen(true);
   const onTimerStart = (withMusic) => {
     if (withMusic) playMusic();
-    audioRef.current.loop = true;
+    // audioRef.current.loop = true;
     setIsMusicDialogOpen(false);
     const timerId = setInterval(() => {
       setTimerValue((prev) => {
@@ -90,22 +92,22 @@ const TimerBody = () => {
               timerValue={timerValue}
             />
             <Box className={styles.timerButtonsBox}>
-              <Button
+              <Button_
                 variant="contained"
-                color="success"
+                // color="success"
                 disabled={currentTimerId}
                 onClick={onClickStart}
               >
                 START
-              </Button>
-              <Button
+              </Button_>
+              <ButtonOut
                 variant="outlined"
-                color="success"
+                // color="success"
                 onClick={onTimerStop}
                 disabled={!currentTimerId}
               >
                 STOP
-              </Button>
+              </ButtonOut>
             </Box>
           </Box>
             {/* ----------------------------------------------- */}
@@ -118,28 +120,28 @@ const TimerBody = () => {
                 <Typography>Do you want to play music?</Typography>
               </Box>
               <Box display={"flex"} justifyContent={"space-evenly"} p={1}>
-                <Button
+                <Button_
                   variant="contained"
-                  color="success"
+                  // color="success"
                   onClick={() => onTimerStart(true)}
                 >
                   Yes
-                </Button>
-                <Button
+                </Button_>
+                <ButtonOut
                   variant="outlined"
-                  color="success"
+                  // color="success"
                   onClick={() => onTimerStart()}
                 >
                   No
-                </Button>
+                </ButtonOut>
               </Box>
               <Box display={"flex"} justifyContent={"center"} p={1}>
-                <Button
-                  color="success"
+                <ButtonOut
+                  // color="success"
                   onClick={() => setIsMusicDialogOpen(false)}
                 >
                   Cancel
-                </Button>
+                </ButtonOut>
               </Box>
             </Box>
           </Dialog>

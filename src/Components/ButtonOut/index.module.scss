@@ -1,0 +1,113 @@
+.salmon {
+  background-color: transparent !important;
+  border: 2px solid #f44336 !important;
+  color: #f44336 !important;
+  &:disabled {
+    border: 2px solid#ef9a9a !important;
+    color: #ef9a9a !important;
+  }
+  &:hover {
+    border: 2px solid #b71c1c !important;
+    color: #b71c1c !important;
+  }
+}
+
+.turquiose {
+  background-color: transparent !important;
+  border: 2px solid #00bcd4 !important;
+  color: #00bcd4 !important;
+  &:disabled {
+    border: 2px solid#80deea !important;
+    color: #80deea !important;
+  }
+  &:hover {
+    border: 2px solid #80deea !important;
+    color: #80deea !important;
+  }
+}
+
+.green {
+  background-color: transparent !important;
+  border: 2px solid #00c853 !important;
+  color: #00c853 !important;
+  &:disabled {
+    border: 2px solid#b9f6ca !important;
+    color: #b9f6ca !important;
+  }
+  &:hover {
+    border: 2px solid #03923e !important;
+    color: #03923e !important;
+  }
+}
+
+.pink {
+  background-color: transparent !important;
+  border: 2px solid #ec407a !important;
+  color: #ec407a !important;
+  &:disabled {
+    border: 2px solid#f8bbd0 !important;
+    color: #f8bbd0 !important;
+  }
+  &:hover {
+    border: 2px solid #ad1457 !important;
+    color: #ad1457 !important;
+  }
+}
+
+.bluegreen {
+  background-color: transparent !important;
+  border: 2px solid #00695c !important;
+  color: #00695c !important;
+  &:disabled {
+    border: 2px solid#80cbc4 !important;
+    color: #80cbc4 !important;
+  }
+  &:hover {
+    border: 2px solid #004d40 !important;
+    color: #004d40 !important;
+  }
+}
+
+.dark {
+  background-color: transparent !important;
+  border: 2px solid #000 !important;
+  color: #000 !important;
+  &:disabled {
+    border: 2px solid#bdbdbd !important;
+    color: #bdbdbd !important;
+  }
+  &:hover {
+    border: 2px solid #263238 !important;
+    color: #263238 !important;
+  }
+}
+
+.grey {
+  background-color: transparent !important;
+  border: 2px solid #78909c !important;
+  color: #78909c !important;
+  &:disabled {
+    border: 2px solid#b0bec5 !important;
+    color: #b0bec5 !important;
+  }
+  &:hover {
+    border: 2px solid #607d8b !important;
+    color: #607d8b !important;
+  }
+}
+
+.default {
+  background-color: transparent !important;
+  border: 2px solid #5c6bc0 !important;
+  color: #5c6bc0 !important;
+  &:disabled {
+    border: 2px solid#c5cae9 !important;
+    color: #c5cae9 !important;
+  }
+  &:hover {
+    border: 2px solid #3f51b5 !important;
+    color: #3f51b5 !important;
+  }
+}
+
+

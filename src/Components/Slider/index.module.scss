@@ -1,0 +1,79 @@
+.salmon {
+  color: #f44336 !important;
+  &:disabled {
+    color: #ef9a9a !important;
+  }
+  &:hover {
+    color: #b71c1c !important;
+  }
+}
+
+.turquiose {
+  color: #00bcd4 !important;
+  &:disabled {
+    color: #80deea !important;
+  }
+  &:hover {
+    color: #00acc1 !important;
+  }
+}
+
+.green {
+  color: #00c853 !important;
+  &:disabled {
+    color: #b9f6ca !important;
+  }
+  &:hover {
+    color: #03923e !important;
+  }
+}
+
+.pink {
+  color: #ec407a !important;
+  &:disabled {
+    color: #f8bbd0 !important;
+  }
+  &:hover {
+    color: #ad1457 !important;
+  }
+}
+
+.bluegreen {
+  color: #00695c !important;
+  &:disabled {
+    color: #80cbc4 !important;
+  }
+  &:hover {
+    color: #004d40 !important;
+  }
+}
+
+.dark {
+  color: #000 !important;
+  &:disabled {
+    color: #bdbdbd !important;
+  }
+  &:hover {
+    color: #263238 !important;
+  }
+}
+
+.grey {
+  color: #78909c !important;
+  &:disabled {
+    color: #b0bec5 !important;
+  }
+  &:hover {
+    color: #607d8b !important;
+  }
+}
+
+.default {
+  color: #5c6bc0 !important;
+  &:disabled {
+    color: #c5cae9 !important;
+  }
+  &:hover {
+    color: #3f51b5 !important;
+  }
+}
