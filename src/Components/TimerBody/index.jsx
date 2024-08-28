@@ -65,9 +65,10 @@ const TimerBody = () => {
   return (
     <>
       <Box className={styles.mainTimerBoxWrapper}>
-        <Box>
+        
           <Box className={styles.mainTimerBox}>
             <Transition
+            className={styles.gifLoaderBox}
               in={!!currentTimerId}
               timeout={1000}
               mountOnEnter
@@ -143,7 +144,6 @@ const TimerBody = () => {
             </Box>
           </Dialog>
         </Box>
-      </Box>
     </>
   );
 };
