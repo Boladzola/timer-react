@@ -3,6 +3,7 @@ import { Box, Button, Slider, TextField } from "@mui/material";
 import styles from "./index.module.scss";
 import Button_ from "../Button";
 import Slider_ from "../Slider";
+import TextField_ from "../Textfield_";
 
 const cutZeroBefore = (str) =>
   str.length >= 2 && str[0] === "0" ? cutZeroBefore(str.slice(1)) : str;
@@ -39,15 +40,15 @@ const TimerInputs = ({ disabled, timerValue, setTimerValue }) => {
         onChange={(e) => setTimerValue(e.target.value)}
         max={3600}
         disabled={disabled}
-        color="success"
+        color="№000000"
       />
       <Box className={styles.timerFieldsBox}>
-        <TextField
+        <TextField_
           value={minutesValue}
           onChange={onHandleChangeMinutesValue}
           disabled={disabled}
           label={"Minutes"}
-          // color="success"
+          // color=""
         />
         <TextField
           value={secondsValue}

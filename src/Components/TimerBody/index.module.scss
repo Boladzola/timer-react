@@ -8,6 +8,10 @@
   button {
     align-self: stretch;
   }
+  input:focus {
+    max-width: 50px;
+    border-color: green;
+  }
 }
 
 .timerButtonsBox {

@@ -39,8 +39,8 @@ const TimerSettings = () => {
   const [localBG, setLocalBG] = useState('');
   const [currentTheme, setCurrentTheme] = useState('');
 
-  const audioRef = useRef(new Audio()); // Use ref to control audio playback directly
-  const signalRef = useRef(new Audio()); // Use ref for signal playback
+  const audioRef = useRef(new Audio()); 
+  const signalRef = useRef(new Audio()); 
 
   const currentMusic = useSelector((store) => store.settings.currentMusic.id);
   const currentSignal = useSelector((store) => store.settings.currentSignal.id);
@@ -53,15 +53,14 @@ const TimerSettings = () => {
   const changeTheme = (id) => dispatch(setTheme(id));
 
   useEffect(() => {
-    // Update audio source when localMusic changes
     audioRef.current.src = musicOptions.find(music => music.id === localMusic)?.src || '';
-    audioRef.current.load(); // Reload the audio
+    audioRef.current.load();
   }, [localMusic]);
 
   useEffect(() => {
-    // Update signal source when localSignal changes
+    
     signalRef.current.src = signalOptions.find(signal => signal.id === localSignal)?.src || '';
-    signalRef.current.load(); // Reload the signal
+    signalRef.current.load(); 
   }, [localSignal]);
 
   const demoMusicPlay = () => {
@@ -88,12 +87,16 @@ const TimerSettings = () => {
     setLocalMusic(currentMusic);
     setLocalSignal(currentSignal);
     setLocalBG(currentBG);
-    setCurrentTheme(theme.id); // Assuming theme.id is used
+    setCurrentTheme(theme.id); 
     setIsDialogOpen(true);
   };
 
   const showBGPreview = () => {
     changeCurrentBG(localBG);
+  };
+
+  const showThemePreview = () => {
+    changeTheme(currentTheme);
   };
 
   const handleSave = () => {
@@ -185,7 +188,7 @@ const TimerSettings = () => {
             </Select>
           </Box>
           <Box className={styles.grid}>
-            <Button_>Change theme</Button_>
+            <Button_ onClick={showThemePreview}>Change theme</Button_>
             <Select
               value={currentTheme}
               color={"success"}
