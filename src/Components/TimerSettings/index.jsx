@@ -27,6 +27,7 @@ import {
 } from "../../store/settingSlice/utils";
 import Button_ from "../Button";
 import ButtonOut from "../ButtonOut";
+import IconButton_ from "../IconButton_";
 
 const TimerSettings = () => {
   const dispatch = useDispatch();
@@ -109,9 +110,9 @@ const TimerSettings = () => {
 
   return (
     <Box className={styles.timerSettings}>
-      <IconButton color="success" onClick={handleOpenDialog}>
+      <IconButton_ onClick={handleOpenDialog}>
         <SettingsIcon />
-      </IconButton>
+      </IconButton_>
       <Dialog open={isDialogOpen} onClose={handleCancel}>
         <Box className={styles.dialogMainBox}>
           <Box p={1}>
@@ -122,13 +123,13 @@ const TimerSettings = () => {
           <Box className={styles.grid}>
             <Box>
               {isMusicPlaying ? (
-                <IconButton color="success" onClick={demoMusicPause}>
+                <IconButton_  onClick={demoMusicPause}>
                   <PauseRoundedIcon />
-                </IconButton>
+                </IconButton_>
               ) : (
-                <IconButton color="success" onClick={demoMusicPlay}>
+                <IconButton_  onClick={demoMusicPlay}>
                   <PlayArrowRoundedIcon />
-                </IconButton>
+                </IconButton_>
               )}
             </Box>
             <Select
@@ -146,13 +147,13 @@ const TimerSettings = () => {
           <Box className={styles.grid}>
             <Box>
               {isSignalPlaying ? (
-                <IconButton color="success" onClick={demoSignalPause}>
+                <IconButton_ color="success" onClick={demoSignalPause}>
                   <PauseRoundedIcon />
-                </IconButton>
+                </IconButton_>
               ) : (
-                <IconButton color="success" onClick={demoSignalPlay}>
+                <IconButton_ color="success" onClick={demoSignalPlay}>
                   <PlayArrowRoundedIcon />
-                </IconButton>
+                </IconButton_>
               )}
             </Box>
             <Select

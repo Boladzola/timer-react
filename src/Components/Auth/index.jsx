@@ -5,6 +5,8 @@ import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { auth, provider } from "../../api/firebase";
 import { signInWithPopup } from "firebase/auth";
 import styles from "./index.module.scss";
+import IconButton_ from "../IconButton_";
+import Typography_ from "../Typography_";
 
 const Auth = ({ isAuth }) => {
   const [currentUser, setCurrentUser] = useState({});
@@ -23,17 +25,17 @@ const Auth = ({ isAuth }) => {
     <Box className={styles.authBox}>
       {isAuth ? (
         <Box>
-          <Typography className={styles.text}>{currentUser.name}</Typography>
-          <IconButton>
+          <Typography_ className={styles.text}>{currentUser.name}</Typography_>
+          <IconButton_>
             <MeetingRoomRoundedIcon />
-          </IconButton>
+          </IconButton_>
         </Box>
       ) : (
         <Box>
-          <Typography className={styles.text}>anonim</Typography>
-          <IconButton onClick={onSignIn}>
+          <Typography_ className={styles.text}>anonim</Typography_>
+          <IconButton_ onClick={onSignIn}>
             <VpnKeyRoundedIcon />
-          </IconButton>
+          </IconButton_>
         </Box>
       )}
     </Box>
