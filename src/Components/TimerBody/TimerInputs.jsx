@@ -43,19 +43,19 @@ const TimerInputs = ({ disabled, timerValue, setTimerValue }) => {
         color="№000000"
       />
       <Box className={styles.timerFieldsBox}>
-        <TextField_
+        <TextField
           value={minutesValue}
           onChange={onHandleChangeMinutesValue}
           disabled={disabled}
           label={"Minutes"}
-          // color=""
+          color="primary"
         />
         <TextField
           value={secondsValue}
           onChange={onHandleChangeSecondsValue}
           disabled={disabled}
           label={"Seconds"}
-          // color="success"
+          color="primary"
         />
         <Button_
           onClick={onSetInputsValues}

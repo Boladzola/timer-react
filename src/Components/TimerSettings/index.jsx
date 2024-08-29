@@ -137,7 +137,7 @@ const TimerSettings = () => {
             </Box>
             <Select
               value={localMusic}
-              color={"success"}
+              color={"primary"}
               onChange={(e) => setLocalMusic(e.target.value)}
             >
               {musicOptions.map((musicItem) => (
@@ -150,18 +150,18 @@ const TimerSettings = () => {
           <Box className={styles.grid}>
             <Box>
               {isSignalPlaying ? (
-                <IconButton_ color="success" onClick={demoSignalPause}>
+                <IconButton_  onClick={demoSignalPause}>
                   <PauseRoundedIcon />
                 </IconButton_>
               ) : (
-                <IconButton_ color="success" onClick={demoSignalPlay}>
+                <IconButton_  onClick={demoSignalPlay}>
                   <PlayArrowRoundedIcon />
                 </IconButton_>
               )}
             </Box>
             <Select
               value={localSignal}
-              color={"success"}
+              color={"primary"}
               onChange={(e) => setLocalSignal(e.target.value)}
             >
               {signalOptions.map(({ id, title }) => (
@@ -177,7 +177,7 @@ const TimerSettings = () => {
             </Button_>
             <Select
               value={localBG}
-              color={"success"}
+              color={"primary"}
               onChange={(e) => setLocalBG(e.target.value)}
             >
               {backgroundOptions.map(({ id, title }) => (
@@ -191,7 +191,7 @@ const TimerSettings = () => {
             <Button_ onClick={showThemePreview}>Change theme</Button_>
             <Select
               value={currentTheme}
-              color={"success"}
+              color={"primary"}
               onChange={(e) => setCurrentTheme(e.target.value)}
             >
               {themes.map(({ id, color }) => (
@@ -202,10 +202,10 @@ const TimerSettings = () => {
             </Select>
           </Box>
           <Box className={styles.grid}>
-            <Button_ onClick={handleSave} variant="contained" color="success">
+            <Button_ onClick={handleSave} variant="contained" >
               Save
             </Button_>
-            <ButtonOut onClick={handleCancel} variant="outlined" color="success">
+            <ButtonOut onClick={handleCancel} variant="outlined" >
               Cancel
             </ButtonOut>
           </Box>
